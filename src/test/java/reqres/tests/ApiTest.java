@@ -51,9 +51,9 @@ public class ApiTest {
     public void testGetUserById(int userId, String firstName, String lastName) {
         given()
                 .spec(requestSpec)
-                .when()
+            .when()
                 .get("/api/users/{id}", userId)
-                .then()
+            .then()
                 .statusCode(200)
                 .body("data.first_name", equalTo(firstName))
                 .body("data.last_name", equalTo(lastName));
@@ -68,9 +68,9 @@ public class ApiTest {
         int userId = 23;
         given()
                 .spec(requestSpec)
-                .when()
+            .when()
                 .get("/api/users/{id}", userId)
-                .then()
+            .then()
                 .statusCode(404);
     }
 
@@ -82,9 +82,9 @@ public class ApiTest {
     public void testGetAllResources() {
         given()
                 .spec(requestSpec)
-                .when()
+            .when()
                 .get("/api/unknown")
-                .then()
+            .then()
                 .statusCode(200)
                 .body("data", hasSize(greaterThan(0)))
                 .body("data.id", everyItem(notNullValue()))
@@ -104,9 +104,9 @@ public class ApiTest {
     public void testGetResourceById(int resourceId, String name) {
         given()
                 .spec(requestSpec)
-                .when()
+            .when()
                 .get("/api/unknown/{id}", resourceId)
-                .then()
+            .then()
                 .statusCode(200)
                 .body("data.name", equalTo(name));
     }
@@ -120,9 +120,9 @@ public class ApiTest {
         int resourceId = 23;
         given()
                 .spec(requestSpec)
-                .when()
+            .when()
                 .get("/api/unknown/{id}", resourceId)
-                .then()
+            .then()
                 .statusCode(404);
     }
 
@@ -141,9 +141,9 @@ public class ApiTest {
         given()
                 .spec(requestSpec)
                 .body(requestBody)
-                .when()
+            .when()
                 .post("/api/users")
-                .then()
+            .then()
                 .statusCode(201)
                 .body("name", equalTo(name))
                 .body("job", equalTo(job));
@@ -164,9 +164,9 @@ public class ApiTest {
         given()
                 .spec(requestSpec)
                 .body(requestBody)
-                .when()
+            .when()
                 .put("/api/users/{id}", userId)
-                .then()
+            .then()
                 .statusCode(200)
                 .body("name", equalTo(name))
                 .body("job", equalTo(job));
@@ -187,9 +187,9 @@ public class ApiTest {
         given()
                 .spec(requestSpec)
                 .body(requestBody)
-                .when()
+            .when()
                 .patch("/api/users/{id}", userId)
-                .then()
+            .then()
                 .statusCode(200)
                 .body("name", equalTo(name))
                 .body("job", equalTo(job));
@@ -204,9 +204,9 @@ public class ApiTest {
         int userId = 2;
         given()
                 .spec(requestSpec)
-                .when()
+            .when()
                 .delete("/api/users/{id}", userId)
-                .then()
+            .then()
                 .statusCode(204);
     }
 
@@ -223,9 +223,9 @@ public class ApiTest {
         given()
                 .spec(requestSpec)
                 .body(requestBody)
-                .when()
+            .when()
                 .post("/api/register")
-                .then()
+            .then()
                 .statusCode(200)
                 .body("id", notNullValue())
                 .body("token", notNullValue());
@@ -244,9 +244,9 @@ public class ApiTest {
         given()
                 .spec(requestSpec)
                 .body(requestBody)
-                .when()
+            .when()
                 .post("/api/register")
-                .then()
+            .then()
                 .statusCode(400)
                 .body("error", equalTo("Missing password"));
     }
@@ -264,9 +264,9 @@ public class ApiTest {
         given()
                 .spec(requestSpec)
                 .body(requestBody)
-                .when()
+            .when()
                 .post("/api/login")
-                .then()
+            .then()
                 .statusCode(200)
                 .body("token", notNullValue());
     }
@@ -284,9 +284,9 @@ public class ApiTest {
         given()
                 .spec(requestSpec)
                 .body(requestBody)
-                .when()
+            .when()
                 .post("/api/login")
-                .then()
+            .then()
                 .statusCode(400)
                 .body("error", equalTo("Missing password"));
     }
@@ -299,9 +299,9 @@ public class ApiTest {
     public void testDelayedResponse() {
         given()
                 .spec(requestSpec)
-                .when()
+            .when()
                 .get("/api/users?delay=3")
-                .then()
+            .then()
                 .statusCode(200)
                 .body("data", hasSize(greaterThan(0)));
     }
