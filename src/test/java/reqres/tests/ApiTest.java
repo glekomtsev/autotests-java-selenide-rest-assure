@@ -31,9 +31,9 @@ public class ApiTest {
     public void testGetAllUsers() {
         given()
                 .spec(requestSpec)
-                .when()
+            .when()
                 .get("/api/users?page=1")
-                .then()
+            .then()
                 .statusCode(200)
                 .body("data", hasSize(greaterThan(0)));
     }
