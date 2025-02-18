@@ -1,18 +1,22 @@
 name: Test
 on: workflow_dispatch
-
 permissions:
   contents: write
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          submodules: false  # Отключаем обработку подмодулей
+          submodules: false
+
+      - name: Remove .gitmodules if exists
+        run: |
+          if [ -f .gitmodules ]; then
+            rm .gitmodules
+          fi
 
       - name: Set execute permission for gradlew
         run: chmod +x gradlew
@@ -36,7 +40,7 @@ jobs:
         with:
           ref: gh-pages
           path: gh-pages
-          submodules: false  # Отключаем обработку подмодулей
+          submodules: false
 
       - name: Generate Allure report
         uses: simple-elf/allure-report-action@master
