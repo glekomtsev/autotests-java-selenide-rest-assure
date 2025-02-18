@@ -1,22 +1,22 @@
 package demoqa.pages;
 
 
-import static com.codeborne.selenide.Condition.cssValue;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
+import com.codeborne.selenide.Selenide;
 
 public class BasePage {
     public void removeBlocks(){
+        // Скрытие элемента с id "fixedban"
         try {
-            $("#fixedban").shouldBe(visible).shouldHave(cssValue("display", "none"));
+            Selenide.executeJavaScript("document.getElementById('fixedban').style.display = 'none';");
         } catch (Exception e) {
-            System.out.println("Элемент с id 'fixedban' не найден");
+            System.out.println("Элемент с id 'fixedban' не найден или уже скрыт");
         }
 
+        // Скрытие футера
         try {
-            $("footer").shouldBe(visible).shouldHave(cssValue("display", "none"));
+            Selenide.executeJavaScript("document.querySelector('footer').style.display = 'none';");
         } catch (Exception e) {
-            System.out.println("Футер не найден");
+            System.out.println("Футер не найден или уже скрыт");
         }
     }
 }
