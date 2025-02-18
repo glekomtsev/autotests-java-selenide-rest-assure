@@ -9,15 +9,17 @@ import static com.codeborne.selenide.Selenide.$;
 public class BasePage {
     public void removeBlocks(){
         try {
-            $("#fixedban").shouldNotBe(visible);
+            $("#fixedban").shouldBe(visible);
             Selenide.executeJavaScript("document.getElementById('fixedban').style.display = 'none';");
+            $("#fixedban").shouldNotBe(visible);
         } catch (Exception e) {
             System.out.println("Элемент с id 'fixedban' не найден или уже скрыт");
         }
 
         try {
-            $("footer").shouldNotBe(visible);
+            $("footer").shouldBe(visible);
             Selenide.executeJavaScript("document.querySelector('footer').style.display = 'none';");
+            $("footer").shouldNotBe(visible);
         } catch (Exception e) {
             System.out.println("Футер не найден или уже скрыт");
         }
