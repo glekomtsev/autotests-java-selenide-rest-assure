@@ -10,7 +10,9 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          submodules: false  # Отключаем обработку подмодулей
 
       - name: Set execute permission for gradlew
         run: chmod +x gradlew
@@ -28,12 +30,13 @@ jobs:
         run: ./gradlew clean test -Dselenide.remote=http://localhost:4444/wd/hub
 
       - name: Checkout gh-pages
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         if: always()
         continue-on-error: true
         with:
           ref: gh-pages
           path: gh-pages
+          submodules: false  # Отключаем обработку подмодулей
 
       - name: Generate Allure report
         uses: simple-elf/allure-report-action@master
@@ -41,13 +44,13 @@ jobs:
         with:
           gh_pages: gh-pages
           allure_results: build/allure-results
-          allure_report: gh-pages/allure-report  # Изменено
-          allure_history: gh-pages/allure-history  # Изменено
+          allure_report: gh-pages/allure-report
+          allure_history: gh-pages/allure-history
 
       - name: Publish report
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: gh-pages  # Изменено
+          publish_dir: gh-pages
           publish_branch: gh-pages
