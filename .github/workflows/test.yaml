@@ -1,16 +1,16 @@
 name: Test
 on: workflow_dispatch
+
 permissions:
   contents: write
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          submodules: false  # Отключаем обработку подмодулей
+        uses: actions/checkout@v3
 
       - name: Set execute permission for gradlew
         run: chmod +x gradlew
@@ -28,19 +28,12 @@ jobs:
         run: ./gradlew clean test -Dselenide.remote=http://localhost:4444/wd/hub
 
       - name: Checkout gh-pages
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
         if: always()
         continue-on-error: true
         with:
           ref: gh-pages
           path: gh-pages
-          submodules: none  # Полностью отключаем submodules
-
-      - name: Remove .gitmodules if exists
-        run: |
-          if [ -f gh-pages/.gitmodules ]; then
-            rm gh-pages/.gitmodules
-          fi
 
       - name: Generate Allure report
         uses: simple-elf/allure-report-action@master
@@ -48,13 +41,13 @@ jobs:
         with:
           gh_pages: gh-pages
           allure_results: build/allure-results
-          allure_report: gh-pages/allure-report
-          allure_history: gh-pages/allure-history
+          allure_report: allure-report
+          allure_history: allure-history
 
       - name: Publish report
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: gh-pages
+          publish_dir: allure-report
           publish_branch: gh-pages
