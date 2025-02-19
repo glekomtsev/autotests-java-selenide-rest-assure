@@ -8,10 +8,10 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class BasePage {
-    public void removeBlocks(){
+    public void removeBlocks() {
         try {
             $("#fixedban").shouldBe(visible);
-            Selenide.executeJavaScript("document.getElementById('fixedban').style.display = 'none';");
+            Selenide.executeJavaScript("document.getElementById('fixedban').style.setProperty('display', 'none', 'important');");
             $("#fixedban").should(hidden);
         } catch (Exception e) {
             System.out.println("Элемент с id 'fixedban' не найден или уже скрыт");
@@ -20,21 +20,10 @@ public class BasePage {
 
         try {
             $("footer").shouldBe(visible);
-            Selenide.executeJavaScript("document.querySelector('footer').style.display = 'none';");
+            Selenide.executeJavaScript("document.querySelector('footer').style.setProperty('display', 'none', 'important');");
             $("footer").should(hidden);
         } catch (Exception e) {
             System.out.println("Footer не найден или уже скрыт");
         }
-
-        try {
-            $("iframe").shouldBe(visible);
-            Selenide.executeJavaScript("document.querySelector('iframe').style.display = 'none';");
-            $("iframe").should(hidden);
-        } catch (Exception e) {
-            System.out.println("'iframe' не найден или уже скрыт");
-        }
-
-
-
     }
 }
