@@ -14,8 +14,8 @@ Actions -> Test -> Run workflow
 ## Функциональность
 
 ### UI-тесты на demoqa.com:
-- **Practice Form:** 
-- **TextBox Form:** 
+- **Practice Form** 
+- **TextBox Form** 
 
 ### API-тесты на reqres.in:
 - Тесты, которые проверяют различные API-эндпоинты, включая запросы на получение, создание и удаление пользователей. Используются проверки статусов ответов и содержимого.
@@ -24,6 +24,7 @@ Actions -> Test -> Run workflow
 - **Java**
 - **Selenide**
 - **Rest Assured**
+- **JUnit 5**
 - **Allure Report**
 - **GitHub Actions**
 
@@ -34,4 +35,3 @@ Actions -> Test -> Run workflow
 ## TO DO:
 
 - Добавить информативные шаги
-- Добавить 
