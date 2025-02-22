@@ -1,5 +1,6 @@
 package demoqa.tests;
 
+import com.github.javafaker.Faker;
 import demoqa.pages.TextBoxPage;
 import org.junit.jupiter.api.Test;
 
@@ -7,11 +8,12 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
 public class TextBoxTest extends BaseTest {
+    Faker faker = new Faker();
 
-    private final String userName = "Uzzle";
-    private final String userEmail = "Uzzle@ya.ru";
-    private final String userCurrentAddress = "Address 1";
-    private final String userPermanentAddress = "Address 2";
+    private final String userName = faker.name().username();
+    private final String userEmail = faker.internet().emailAddress();
+    private final String userCurrentAddress = faker.address().fullAddress();
+    private final String userPermanentAddress = faker.address().fullAddress();
 
     TextBoxPage textBoxPage = new TextBoxPage();
 
@@ -40,6 +42,8 @@ public class TextBoxTest extends BaseTest {
                     userEmail,
                     userCurrentAddress,
                     userPermanentAddress
+
+
             );
         });
     }

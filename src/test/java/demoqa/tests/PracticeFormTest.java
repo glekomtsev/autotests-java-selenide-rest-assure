@@ -1,5 +1,6 @@
 package demoqa.tests;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import demoqa.pages.PracticeFormPage;
 
@@ -8,11 +9,13 @@ import static io.qameta.allure.Allure.step;
 
 public class PracticeFormTest extends BaseTest {
 
-    private final String firstName = "Oleg";
-    private final String lastName = "Popov";
-    private final String email = "uzze@ya.ri";
+    Faker faker = new Faker();
+
+    private final String firstName = faker.name().firstName();
+    private final String lastName = faker.name().lastName();
+    private final String email = faker.internet().emailAddress();
     private final String gender = "Other";
-    private final String userNumber = "1234567890";
+    private final String userNumber = faker.phoneNumber().subscriberNumber(10);
     private final String month = "September";
     private final String year = "1998";
     private final String day = "01";
@@ -37,8 +40,7 @@ public class PracticeFormTest extends BaseTest {
         });
 
         step("Заполняем форму", () -> {
-            practiceFormPage
-                    .setFirstName(firstName)
+            practiceFormPage.setFirstName(firstName)
                     .setLastName(lastName)
                     .setEmail(email)
                     .selectGender(gender)
@@ -54,20 +56,19 @@ public class PracticeFormTest extends BaseTest {
         step("Отправляем форму", practiceFormPage::submitForm);
 
         step("Проверяем результаты", () -> {
-            practiceFormPage
-                    .verifyModalAppears()
-                    .verifyFormData(
-                            firstName, lastName,
-                            email,
-                            gender,
-                            userNumber,
-                            day + " " + month + "," + year,
-                            subject,
-                            hobby1 + ", " + hobby2 + ", " + hobby3,
-                            picturePath,
-                            currentAddress,
-                            state + " " + city
-                    );
+            practiceFormPage.verifyModalAppears().verifyFormData(
+                    firstName,
+                    lastName,
+                    email,
+                    gender,
+                    userNumber,
+                    day + " " + month + "," + year,
+                    subject,
+                    hobby1 + ", " + hobby2 + ", " + hobby3,
+                    picturePath,
+                    currentAddress,
+                    state + " " + city
+            );
         });
     }
 }
