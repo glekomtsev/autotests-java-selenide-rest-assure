@@ -14,7 +14,7 @@ import static io.restassured.RestAssured.given;
 @Feature("User Management")
 @Story("CRUD Operations for Users")
 @Tag("API_test")
-public class ApiTest {
+public class ReqresApiTest {
 
     private static RequestSpecification requestSpec;
 
