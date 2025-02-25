@@ -19,12 +19,21 @@ public class BasePage {
             System.out.println("Элемент с id 'fixedban' не найден или уже скрыт");
         }
 
+
         try {
             $("footer").shouldBe(visible);
             Selenide.executeJavaScript("document.querySelector('footer').style.setProperty('display', 'none', 'important');");
             $("footer").should(hidden);
         } catch (Exception e) {
             System.out.println("Footer не найден или уже скрыт");
+        }
+
+        try {
+            Selenide.executeJavaScript("document.querySelector('iframe').style.setProperty('display', 'none', 'important');");
+        } catch (Exception e) {
+            System.out.println("Iframe не найден или уже скрыт: " + e.getMessage());
+        } finally {
+            switchTo().defaultContent();
         }
 
     }
