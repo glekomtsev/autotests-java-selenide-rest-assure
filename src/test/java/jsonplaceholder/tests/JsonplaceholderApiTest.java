@@ -1,4 +1,4 @@
-package jsonplaceholder;
+package jsonplaceholder.tests;
 
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
@@ -7,12 +7,9 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 
-public class JsonplaceholderApiTest {
+public class JsonplaceholderApiTest  extends BaseTest{
 
-    @BeforeAll
-    public static void setUp(){
-        baseURI = "https://jsonplaceholder.typicode.com";
-    }
+
 
     @Test
     public void getAllPosts() {
