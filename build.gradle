@@ -32,6 +32,8 @@ dependencies {
     implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.5.0'
     runtimeOnly group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.22.1'
     implementation group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
+    implementation group: 'io.qameta.allure', name: 'allure-rest-assured', version: '2.29.1'
+
 
 }
 
