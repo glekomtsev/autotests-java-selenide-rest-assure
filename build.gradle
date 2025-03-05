@@ -33,8 +33,7 @@ dependencies {
     runtimeOnly group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.22.1'
     implementation group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
     implementation group: 'io.qameta.allure', name: 'allure-rest-assured', version: '2.29.1'
-
-
+    implementation group: 'org.assertj', name: 'assertj-core', version: '3.27.3'
 }
 
 test {

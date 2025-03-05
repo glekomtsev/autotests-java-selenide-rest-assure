@@ -9,9 +9,13 @@ import static io.restassured.RestAssured.given;
 
 public class PostService implements CrudInterface <Post>{
 
-    private static final String POSTS_URL = "/posts";
+    private final RequestSpecification reqSpec;
 
-    private final RequestSpecification reqSpec = ReqSpecs.unAuthSpec();
+    public PostService(RequestSpecification reqSpec) {
+        this.reqSpec = reqSpec;
+    }
+
+    private static final String POSTS_URL = "/posts";
 
     @Override
     public Post create(Post item) {
@@ -19,7 +23,7 @@ public class PostService implements CrudInterface <Post>{
                 .spec(reqSpec)
                 .body(item)
             .when()
-                .get(POSTS_URL)
+                .post(POSTS_URL)
             .then()
                 .extract()
                 .body()

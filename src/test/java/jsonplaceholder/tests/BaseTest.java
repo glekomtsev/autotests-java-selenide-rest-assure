@@ -8,10 +8,11 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class BaseTest {
 
+    static final String BASE_URL = "https://jsonplaceholder.typicode.com";
 
     @BeforeAll
     public static void setUp(){
-        RestAssured.baseURI = "https://jsonplaceholder.typicode.com";
+        RestAssured.baseURI = BASE_URL;
         RestAssured.filters(
                 new RequestLoggingFilter(),
                 new ResponseLoggingFilter(),
