@@ -42,8 +42,6 @@ public class TextBoxTest extends BaseTest {
                     userEmail,
                     userCurrentAddress,
                     userPermanentAddress
-
-
             );
         });
     }
